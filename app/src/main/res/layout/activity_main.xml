@@ -7,10 +7,14 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <ListView
-        android:id="@+id/my_list_view"
+    <!-- STEP 4.2: GridView untuk menampilkan restaurant dalam bentuk grid -->
+    <GridView
+        android:id="@+id/grid_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:padding="16dp"/>
+        android:numColumns="2"
+        android:padding="8dp"
+        android:horizontalSpacing="8dp"
+        android:verticalSpacing="8dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

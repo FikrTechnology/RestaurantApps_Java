@@ -46,6 +46,12 @@ dependencies {
     implementation(libs.okhttp.logging)
     implementation(libs.gson)
     
+    // Glide for Image Loading
+    implementation(libs.glide)
+    
+    // CardView for Grid Item Card
+    implementation(libs.cardview)
+    
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)

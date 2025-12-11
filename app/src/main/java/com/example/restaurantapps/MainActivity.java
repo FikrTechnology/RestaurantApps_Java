@@ -2,16 +2,13 @@ package com.example.restaurantapps;
 
 import android.os.Bundle;
 import android.util.Log;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
+import android.widget.GridView;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 
+import com.example.restaurantapps.adapter.RestaurantAdapter;
 import com.example.restaurantapps.api.ApiService;
 import com.example.restaurantapps.api.RetrofitClient;
 import com.example.restaurantapps.model.Restaurant;
@@ -27,23 +24,28 @@ import retrofit2.Response;
 /**
  * STEP 4: MAIN ACTIVITY - UI dan Logic Aplikasi
  * 
- * Activity ini adalah entry point aplikasi yang menampilkan list restaurant.
+ * Activity ini adalah entry point aplikasi yang menampilkan list restaurant dalam GridView.
+ * 
+ * PERUBAHAN dari ListView ke GridView:
+ * - ListView → GridView (2 column layout)
+ * - ArrayAdapter → RestaurantAdapter (custom adapter)
+ * - Simple list item → Card dengan gambar, nama, kota, rating
  * 
  * Flow:
- * 1. Setup UI (ListView, Adapter)
+ * 1. Setup UI (GridView, Custom Adapter)
  * 2. Inisialisasi API Service
  * 3. Fetch data dari API
  * 4. Handle response (success/failure)
- * 5. Update UI dengan data yang didapat
+ * 5. Update GridView dengan data yang didapat
  */
 public class MainActivity extends AppCompatActivity {
     // Tag untuk logging
     private static final String TAG = "MainActivity";
     
     // UI Components
-    ListView listView;                          // ListView untuk menampilkan list
+    GridView gridView;                          // GridView untuk menampilkan restaurant dalam grid
     ArrayList<Restaurant> restaurantList;       // Data source untuk adapter
-    ArrayAdapter<Restaurant> adapter;           // Adapter untuk bind data ke ListView
+    RestaurantAdapter adapter;                  // Custom adapter untuk GridView
     
     // API Service
     ApiService apiService;                      // Interface untuk API calls
@@ -58,11 +60,14 @@ public class MainActivity extends AppCompatActivity {
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_main);
 
-        // STEP 4.2: Setup ListView
-        listView = findViewById(R.id.my_list_view);  // Ambil reference ListView dari layout
-        restaurantList = new ArrayList<>();          // Buat ArrayList kosong untuk data
-        adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, restaurantList);
-        listView.setAdapter(adapter);                // Set adapter ke ListView
+        // STEP 4.2: Setup GridView dengan Custom Adapter
+        gridView = findViewById(R.id.grid_view);  // Ambil reference GridView dari layout
+        restaurantList = new ArrayList<>();        // Buat ArrayList kosong untuk data
+        
+        // STEP 4.2.8: Buat instance RestaurantAdapter (custom adapter)
+        // RestaurantAdapter akan handle binding data ke card layout
+        adapter = new RestaurantAdapter(this, restaurantList);
+        gridView.setAdapter(adapter);             // Set adapter ke GridView
 
         // STEP 4.3: Initialize API Service
         // Dapatkan instance ApiService dari RetrofitClient
@@ -101,7 +106,7 @@ public class MainActivity extends AppCompatActivity {
                         // STEP 4.12: Update data di ArrayList
                         restaurantList.clear();              // Kosongkan data lama
                         restaurantList.addAll(restaurants);  // Tambahkan data baru
-                        adapter.notifyDataSetChanged();      // Beritahu adapter data berubah
+                        adapter.notifyDataSetChanged();      // PENTING: Beritahu adapter data berubah
                         
                         // STEP 4.13: Log dan tampilkan pesan sukses
                         Log.d(TAG, "Success: Loaded " + restaurantResponse.getCount() + " restaurants");
