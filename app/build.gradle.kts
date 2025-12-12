@@ -52,6 +52,14 @@ dependencies {
     // CardView for Grid Item Card
     implementation(libs.cardview)
     
+    // MVVM - Lifecycle, ViewModel, LiveData
+    implementation(libs.lifecycle.viewmodel)
+    implementation(libs.lifecycle.livedata)
+    
+    // Coroutines for async operations
+    implementation(libs.coroutines.core)
+    implementation(libs.coroutines.android)
+
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)

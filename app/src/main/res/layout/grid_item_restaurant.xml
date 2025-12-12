@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- STEP 4.2: Layout custom untuk setiap item card di GridView -->
-<!-- Card ini menampilkan: Gambar, Nama, Tempat, Rating -->
+<!-- PRESENTATION LAYER: Grid Item Layout
+     Layout custom untuk setiap item card di GridView
+     Card ini menampilkan: Gambar, Nama, Tempat, Rating
+-->
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/cardViewRestaurant"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     app:cardCornerRadius="12dp"
@@ -14,24 +17,26 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <!-- STEP 4.2.1: ImageView untuk gambar restaurant -->
+        <!-- ImageView: Tampilkan gambar restaurant -->
+        <!-- ID: imageViewRestaurant (untuk Glide image loading) -->
         <ImageView
-            android:id="@+id/iv_restaurant_image"
+            android:id="@+id/imageViewRestaurant"
             android:layout_width="match_parent"
             android:layout_height="160dp"
             android:scaleType="centerCrop"
             android:contentDescription="@string/app_name" />
 
-        <!-- STEP 4.2.2: Container untuk text (padding dan spacing) -->
+        <!-- Container untuk text (padding dan spacing) -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:padding="12dp">
 
-            <!-- STEP 4.2.3: TextView untuk nama restaurant -->
+            <!-- TextView: Nama restaurant (bold, 2 lines max) -->
+            <!-- ID: textViewName (untuk binding data) -->
             <TextView
-                android:id="@+id/tv_restaurant_name"
+                android:id="@+id/textViewName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Restaurant Name"
@@ -40,9 +45,10 @@
                 android:maxLines="2"
                 android:ellipsize="end" />
 
-            <!-- STEP 4.2.4: TextView untuk kota -->
+            <!-- TextView: Kota (gray color, 1 line) -->
+            <!-- ID: textViewCity (untuk binding data) -->
             <TextView
-                android:id="@+id/tv_restaurant_city"
+                android:id="@+id/textViewCity"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Kota"
@@ -52,7 +58,7 @@
                 android:maxLines="1"
                 android:ellipsize="end" />
 
-            <!-- STEP 4.2.5: Container untuk rating dengan ikon -->
+            <!-- Container untuk rating (horizontal layout) -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -60,23 +66,25 @@
                 android:layout_marginTop="8dp"
                 android:gravity="center_vertical">
 
-                <!-- STEP 4.2.6: TextView untuk rating -->
-                <TextView
-                    android:id="@+id/tv_restaurant_rating"
+                <!-- RatingBar: Tampilkan rating dengan bintang -->
+                <!-- ID: ratingBarRestaurant (untuk rating visual) -->
+                <RatingBar
+                    android:id="@+id/ratingBarRestaurant"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="4.5"
-                    android:textStyle="bold"
-                    android:textSize="12sp"
-                    android:textColor="#FF9800" />
+                    android:numStars="5"
+                    android:isIndicator="true"
+                    android:stepSize="0.1"
+                    style="?android:attr/ratingBarStyleSmall" />
 
-                <!-- STEP 4.2.7: TextView untuk simbol bintang -->
+                <!-- TextView: Text rating (optional, untuk clarity) -->
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text=" ⭐"
-                    android:textSize="12sp"
-                    android:layout_marginStart="4dp" />
+                    android:text=" Rating"
+                    android:textSize="10sp"
+                    android:layout_marginStart="4dp"
+                    android:textColor="#666666" />
 
             </LinearLayout>
 

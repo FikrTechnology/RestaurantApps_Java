@@ -1,34 +1,17 @@
-package com.example.restaurantapps.model;
-
-import com.google.gson.annotations.SerializedName;
+package com.example.restaurantapps.domain.model;
 
 /**
- * STEP 2: MODEL CLASS - Restaurant
+ * DOMAIN LAYER: Entity
  * 
- * Class ini berfungsi sebagai blueprint/template untuk data restaurant.
- * Setiap variabel di sini merepresentasikan field yang ada di JSON response API.
- * 
- * @SerializedName digunakan oleh Gson untuk mapping otomatis dari JSON ke Java Object.
- * Contoh: JSON field "pictureId" akan otomatis di-map ke variable pictureId.
+ * Representasi data yang independent dari storage atau API.
+ * Class ini adalah "pure data" tanpa logic bisnis.
  */
 public class Restaurant {
-    
-    @SerializedName("id")
     private String id;
-    
-    @SerializedName("name")
     private String name;
-    
-    @SerializedName("description")
     private String description;
-    
-    @SerializedName("pictureId")
     private String pictureId;
-    
-    @SerializedName("city")
     private String city;
-    
-    @SerializedName("rating")
     private double rating;
 
     public Restaurant() {
@@ -43,55 +26,56 @@ public class Restaurant {
         this.rating = rating;
     }
 
+    // Getters
     public String getId() {
         return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
     }
 
     public String getName() {
         return name;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
     public String getDescription() {
         return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
     }
 
     public String getPictureId() {
         return pictureId;
     }
 
-    public void setPictureId(String pictureId) {
-        this.pictureId = pictureId;
-    }
-
     public String getCity() {
         return city;
-    }
-
-    public void setCity(String city) {
-        this.city = city;
     }
 
     public double getRating() {
         return rating;
     }
 
+    // Setters
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public void setPictureId(String pictureId) {
+        this.pictureId = pictureId;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
     public void setRating(double rating) {
         this.rating = rating;
     }
 
-    // Helper method to get picture URL
     public String getPictureUrl() {
         return "https://restaurant-api.dicoding.dev/images/medium/" + pictureId;
     }
